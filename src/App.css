@@ -327,7 +327,7 @@
 
 .empty-state-icon {
   font-size: 52px;
-  margin-bottom: 14px;
+  margin: 0 auto 14px;
   display: block;
   opacity: 0.6;
 }
