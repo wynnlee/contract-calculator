@@ -10,35 +10,32 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'PingFang SC',
-    'Hiragino Sans GB',
-    'Microsoft YaHei',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: var(--color-fill-2);
-  transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Dark mode: use solid bg since --color-fill-2 becomes translucent */
-body[arco-theme='dark'] {
-  background: var(--color-bg-1);
+  background: var(--animal-bg-color);
+  transition: background-color 0.3s ease;
 }
 
 #root {
   width: 100%;
   max-width: 100%;
+}
+
+/* Dark theme overrides */
+body[data-theme='dark'] {
+  --animal-bg-color: #2a2520;
+  --animal-bg-color-secondary: #3a3530;
+  --animal-text-color: #e8e0d0;
+  --animal-text-color-secondary: #b0a590;
+  --animal-text-color-muted: #c0b8a0;
+  --animal-border-color: #5a5550;
+  --animal-border-color-hover: #8a8070;
+  --animal-border-color-light: #4a4540;
+  --animal-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --animal-shadow-base: 0 3px 10px rgba(0, 0, 0, 0.3);
+  --animal-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme='dark'] .app-container {
+  background: #2a2520;
 }
