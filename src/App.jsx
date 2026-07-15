@@ -36,21 +36,21 @@ const PRESET_RATIOS = [
 ];
 
 /** Tiny copy button */
-function CopyBtn({ text, label }) {
+function CopyBtn({ text }) {
   const copy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(String(text));
-      Notification.success({ message: `${label || '已'}复制成功`, duration: 1.5 });
+      Notification.success({ message: '复制成功', duration: 1.5 });
     } catch {
       Notification.error({ message: '复制失败，请手动复制', duration: 1.5 });
     }
-  }, [text, label]);
+  }, [text]);
 
   if (text === undefined || text === null || text === '') return null;
 
   return (
-    <Tooltip title={`复制${label || ''}`} variant="island">
-      <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label={`复制${label || ''}`}>
+    <Tooltip title="复制" variant="island">
+      <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label="复制">
         <Icon name="icon-camera" size={14} />
       </Button>
     </Tooltip>
@@ -63,7 +63,7 @@ function ChineseBadge({ text }) {
   return (
     <span className="chinese-badge">
       {text}
-      <CopyBtn text={text} label="大写" />
+      <CopyBtn text={text} />
     </span>
   );
 }
@@ -74,12 +74,12 @@ function AmountWithCopy({ value, formatted, chinese, bold, color }) {
     <span className="amount-with-copy">
       <span className="amount-value">
         <span className="amount-num" style={{ fontWeight: bold ? 700 : 400, color }}>{formatted}</span>
-        <CopyBtn text={formatted ? formatted.replace(/^¥/, '') : value} label="金额" />
+        <CopyBtn text={formatted ? formatted.replace(/^¥/, '') : value} />
       </span>
       {chinese && (
         <span className="amount-chinese">
           <span className="amount-cn">{chinese}</span>
-          <CopyBtn text={chinese} label="大写" />
+          <CopyBtn text={chinese} />
         </span>
       )}
     </span>
@@ -94,6 +94,7 @@ function App() {
   const [taxRate, setTaxRate] = useState('0.13');
   const [ratioInputs, setRatioInputs] = useState(['30', '70']);
   const [unit, setUnit] = useState('yuan');
+  const [tableLoading, setTableLoading] = useState(false);
 
   // Display helpers
   const disp = useCallback((amount) => unit === 'wan' ? amount / 10000 : amount, [unit]);
@@ -164,6 +165,19 @@ function App() {
   const hasAnyRatio = ratioInputs.some((r) => r !== '');
   const hasData = (unitPrice || 0) > 0 && (quantity || 0) > 0;
 
+  // Simulate loading when data changes
+  const prevDataKey = useRef('');
+  const dataKey = `${unitPrice}-${quantity}-${taxRate}-${ratioInputs.join(',')}-${unit}`;
+  useEffect(() => {
+    if (prevDataKey.current !== dataKey && hasData) {
+      setTableLoading(true);
+      const t = setTimeout(() => setTableLoading(false), 400);
+      prevDataKey.current = dataKey;
+      return () => clearTimeout(t);
+    }
+    prevDataKey.current = dataKey;
+  }, [dataKey, hasData]);
+
   const addRatio = () => setRatioInputs([...ratioInputs, '']);
   const removeRatio = (index) => {
     if (ratioInputs.length <= 1) return;
@@ -216,7 +230,7 @@ function App() {
           <p className="hero-subtitle">输入合同参数，自动计算含税/不含税金额及各期款项</p>
         </header>
 
-        <Divider type="line-brown" />
+        <Divider type="wave-yellow" />
 
         {/* Input Card */}
         <Card className="input-card">
@@ -308,7 +322,6 @@ function App() {
                     style={{ flex: 1 }}
                   />
                   <Button
-                    type="text"
                     danger
                     size="small"
                     onClick={() => removeRatio(idx)}
@@ -331,7 +344,7 @@ function App() {
           </div>
         </Card>
 
-        <Divider type="line-brown" />
+        <Divider type="wave-yellow" />
 
         {/* Results */}
         {hasData ? (
@@ -348,7 +361,7 @@ function App() {
                   <span className="statistic-value" style={{ color: 'var(--animal-primary-color)' }}>
                     ¥{fmt(totals.amountIncludingTax)}
                   </span>
-                  <CopyBtn text={fmt(totals.amountIncludingTax)} label="金额" />
+                  <CopyBtn text={fmt(totals.amountIncludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseIncludingTax} />
               </Card>
@@ -361,7 +374,7 @@ function App() {
                   <span className="statistic-value" style={{ color: 'var(--animal-warning-color)' }}>
                     ¥{fmt(totals.taxAmount)}
                   </span>
-                  <CopyBtn text={fmt(totals.taxAmount)} label="金额" />
+                  <CopyBtn text={fmt(totals.taxAmount)} />
                 </div>
                 <ChineseBadge text={numberToChinese(totals.taxAmount)} />
               </Card>
@@ -372,7 +385,7 @@ function App() {
                 </div>
                 <div className="statistic-row">
                   <span className="statistic-value">¥{fmt(totals.amountExcludingTax)}</span>
-                  <CopyBtn text={fmt(totals.amountExcludingTax)} label="金额" />
+                  <CopyBtn text={fmt(totals.amountExcludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseExcludingTax} />
               </Card>
@@ -386,6 +399,7 @@ function App() {
                 dataSource={totals.installments}
                 rowKey="key"
                 striped
+                loading={tableLoading}
                 scroll={{ x: 640 }}
               />
               {/* Manual summary row */}

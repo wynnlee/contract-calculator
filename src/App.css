@@ -343,6 +343,17 @@
   opacity: 0.55;
 }
 
+/* ---------- Tooltip z-index fix ---------- */
+.animal-tooltip-UY7BU,
+.animal-tooltipWrapper-PL7BH {
+  z-index: 9999 !important;
+}
+
+/* Table row hover fix */
+.animal-row-iDOMw:hover {
+  background: var(--animal-bg-color-secondary) !important;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .app-container  { padding: 12px; }
