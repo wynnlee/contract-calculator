@@ -218,8 +218,10 @@
 
 .statistic-icon {
   flex-shrink: 0;
-  margin-right: 2px;
-  color: var(--animal-text-color);
+  width: 28px;
+  height: 28px;
+  margin-right: 4px;
+  image-rendering: pixelated;
 }
 
 .statistic-value {
@@ -336,7 +338,6 @@
 .empty-icon {
   display: block;
   margin: 0 auto 16px;
-  opacity: 0.45;
 }
 
 .empty-text {
@@ -345,6 +346,10 @@
 }
 
 /* ---------- Footer ---------- */
+.animal-wrapper-IRrhj {
+  margin-top: 50px;
+}
+
 .app-footer {
   text-align: center;
   padding: 30px;

@@ -17,6 +17,8 @@ import {
 import 'animal-island-ui/dist/index.css';
 import { numberToChinese, formatNumber } from './utils/numberToChinese';
 import bgImg from '/bg2.jpg';
+import item023 from 'animal-island-ui/items/item-023.png';
+import cursorImg from '/shubiao.png';
 import './App.css';
 
 /* ── Helpers ── */
@@ -224,7 +226,7 @@ function App() {
   ];
 
   return (
-    <div className="app-container" style={{ backgroundImage: `url(${bgImg})` }}>
+    <div className="app-container" style={{ backgroundImage: `url(${bgImg})`, cursor: `url(${cursorImg}), auto` }}>
       <div className="app-wrapper">
         {/* Header */}
         <header className="hero">
@@ -357,7 +359,7 @@ function App() {
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
-                  <Icon name="icon-miles" size={22} className="statistic-icon" />
+                  <img src={item023} alt="" className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value" style={{ color: 'var(--animal-primary-color)' }}>
                       ¥{fmt(totals.amountIncludingTax)}
@@ -373,7 +375,7 @@ function App() {
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
-                  <Icon name="icon-miles" size={22} className="statistic-icon" />
+                  <img src={item023} alt="" className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value" style={{ color: 'var(--animal-warning-color)' }}>
                       ¥{fmt(totals.taxAmount)}
@@ -389,7 +391,7 @@ function App() {
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
-                  <Icon name="icon-miles" size={22} className="statistic-icon" />
+                  <img src={item023} alt="" className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value">
                       ¥{fmt(totals.amountExcludingTax)}
@@ -407,6 +409,7 @@ function App() {
               <Table
                 columns={installmentColumns}
                 dataSource={totals.installments}
+                striped
                 rowKey="key"
                 loading={tableLoading}
                 scroll={{ x: 640 }}
