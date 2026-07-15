@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import {
   ConfigProvider,
   InputNumber,
@@ -14,6 +14,7 @@ import {
   Message,
   Tooltip,
   Switch,
+  Radio,
 } from '@arco-design/web-react';
 import {
   IconCopy,
@@ -112,6 +113,38 @@ function App() {
   const [quantity, setQuantity] = useState(null);
   const [taxRate, setTaxRate] = useState(0.13);
   const [ratioInputs, setRatioInputs] = useState(['30', '70']);
+  const [unit, setUnit] = useState('yuan');
+
+  // Convert internal amount (in 元) to display amount based on selected unit
+  const disp = useCallback((amount) => unit === 'wan' ? amount / 10000 : amount, [unit]);
+  // Format for display: 万元 strips trailing zeros, 元 keeps 2 decimals
+  const fmt = useCallback((amount) => {
+    const val = disp(amount);
+    if (unit === 'wan') {
+      // Strip trailing zeros after decimal
+      const parts = val.toFixed(4).split('.');
+      const intStr = Number(parts[0]).toLocaleString('zh-CN');
+      const decStr = parts[1].replace(/0+$/, '');
+      return decStr ? `${intStr}.${decStr}` : intStr;
+    }
+    return formatNumber(val);
+  }, [unit, disp]);
+  // Dynamic precision for Statistic component
+  const getPrecision = useCallback((amount) => {
+    if (unit === 'yuan') return 2;
+    const val = amount / 10000;
+    const dec = val.toFixed(4).split('.')[1].replace(/0+$/, '');
+    return dec.length;
+  }, [unit]);
+
+  // When unit changes, convert unitPrice to match the new unit
+  const prevUnit = useRef(unit);
+  useEffect(() => {
+    if (prevUnit.current !== unit && unitPrice !== null) {
+      setUnitPrice(unit === 'wan' ? unitPrice / 10000 : unitPrice * 10000);
+    }
+    prevUnit.current = unit;
+  }, [unit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Apply theme to document
   useEffect(() => {
@@ -119,9 +152,10 @@ function App() {
     localStorage.setItem('arco-theme', theme);
   }, [theme]);
 
-  // Calculate totals — unitPrice is tax-inclusive (含税单价)
+  // Calculate totals — unitPrice is tax-inclusive, in the currently selected unit
   const totals = useMemo(() => {
-    const price = unitPrice || 0;
+    // Convert input price to 元 for internal calculation
+    const price = (unitPrice || 0) * (unit === 'wan' ? 10000 : 1);
     const qty = quantity || 0;
     const tax = taxRate || 0;
 
@@ -196,13 +230,13 @@ function App() {
       ),
     },
     {
-      title: '含税金额',
+      title: unit === 'wan' ? '含税金额 (万元)' : '含税金额 (元)',
       dataIndex: 'includingTaxAmount',
-      width: 240,
+      width: 250,
       render: (val, record) => (
         <AmountWithCopy
           value={val}
-          formatted={`¥${formatNumber(val)}`}
+          formatted={`¥${fmt(val)}`}
           chinese={record.chineseIncludingTax}
           bold
           color="rgb(var(--arcoblue-6))"
@@ -210,13 +244,13 @@ function App() {
       ),
     },
     {
-      title: '不含税金额',
+      title: unit === 'wan' ? '不含税金额 (万元)' : '不含税金额 (元)',
       dataIndex: 'excludingTaxAmount',
-      width: 240,
+      width: 250,
       render: (val, record) => (
         <AmountWithCopy
           value={val}
-          formatted={`¥${formatNumber(val)}`}
+          formatted={`¥${fmt(val)}`}
           chinese={record.chineseExcludingTax}
           bold
         />
@@ -254,11 +288,22 @@ function App() {
           {/* Input Section */}
           <Card className="input-card">
             {/* Step 1: Contract Parameters */}
-            <div className="input-section-label">合同参数</div>
+            <div className="input-section-label">
+              合同参数
+              <Radio.Group
+                value={unit}
+                onChange={setUnit}
+                size="small"
+                style={{ marginLeft: 12 }}
+              >
+                <Radio value="yuan">元</Radio>
+                <Radio value="wan">万元</Radio>
+              </Radio.Group>
+            </div>
             <Row gutter={[24, 16]} align="center">
               <Col xs={24} sm={12} md={8}>
                 <div className="input-group">
-                  <Text className="input-label">含税单价 (元)</Text>
+                  <Text className="input-label">含税单价 ({unit === 'wan' ? '万元' : '元'})</Text>
                   <InputNumber
                     value={unitPrice}
                     onChange={setUnitPrice}
@@ -381,13 +426,13 @@ function App() {
                     </div>
                     <div className="statistic-row">
                       <Statistic
-                        value={totals.amountIncludingTax}
-                        precision={2}
+                        value={disp(totals.amountIncludingTax)}
+                        precision={getPrecision(totals.amountIncludingTax)}
                         prefix="¥"
                         groupSeparator
                         styleValue={{ fontSize: 28, fontWeight: 700, color: 'rgb(var(--arcoblue-6))' }}
                       />
-                      <CopyBtn text={formatNumber(totals.amountIncludingTax)} label="金额" />
+                      <CopyBtn text={fmt(totals.amountIncludingTax)} label="金额" />
                     </div>
                     <ChineseBadge text={totals.chineseIncludingTax} />
                   </Card>
@@ -400,13 +445,13 @@ function App() {
                     </div>
                     <div className="statistic-row">
                       <Statistic
-                        value={totals.taxAmount}
-                        precision={2}
+                        value={disp(totals.taxAmount)}
+                        precision={getPrecision(totals.taxAmount)}
                         prefix="¥"
                         groupSeparator
                         styleValue={{ fontSize: 28, fontWeight: 700, color: 'rgb(var(--orange-6))' }}
                       />
-                      <CopyBtn text={formatNumber(totals.taxAmount)} label="金额" />
+                      <CopyBtn text={fmt(totals.taxAmount)} label="金额" />
                     </div>
                     <ChineseBadge text={numberToChinese(totals.taxAmount)} />
                   </Card>
@@ -419,13 +464,13 @@ function App() {
                     </div>
                     <div className="statistic-row">
                       <Statistic
-                        value={totals.amountExcludingTax}
-                        precision={2}
+                        value={disp(totals.amountExcludingTax)}
+                        precision={getPrecision(totals.amountExcludingTax)}
                         prefix="¥"
                         groupSeparator
                         styleValue={{ fontSize: 28, fontWeight: 700 }}
                       />
-                      <CopyBtn text={formatNumber(totals.amountExcludingTax)} label="金额" />
+                      <CopyBtn text={fmt(totals.amountExcludingTax)} label="金额" />
                     </div>
                     <ChineseBadge text={totals.chineseExcludingTax} />
                   </Card>
@@ -444,7 +489,7 @@ function App() {
                   rowKey="ratio"
                   border={{ wrapper: true, cell: true }}
                   stripe
-                  scroll={{ x: 640 }}
+                  scroll={{ x: 660 }}
                   summary={() => (
                     <Table.Summary>
                       <Table.Summary.Row>
@@ -454,7 +499,7 @@ function App() {
                         <Table.Summary.Cell>
                           <AmountWithCopy
                             value={totals.amountIncludingTax}
-                            formatted={`¥${formatNumber(totals.amountIncludingTax)}`}
+                            formatted={`¥${fmt(totals.amountIncludingTax)}`}
                             chinese={totals.chineseIncludingTax}
                             bold
                             color="rgb(var(--arcoblue-6))"
@@ -463,7 +508,7 @@ function App() {
                         <Table.Summary.Cell>
                           <AmountWithCopy
                             value={totals.amountExcludingTax}
-                            formatted={`¥${formatNumber(totals.amountExcludingTax)}`}
+                            formatted={`¥${fmt(totals.amountExcludingTax)}`}
                             chinese={totals.chineseExcludingTax}
                             bold
                           />
