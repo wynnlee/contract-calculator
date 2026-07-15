@@ -228,10 +228,7 @@
 
 .statistic-icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
   margin-right: 4px;
-  image-rendering: pixelated;
 }
 
 .statistic-value {
@@ -344,6 +341,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   color: var(--animal-text-color);
 }
 

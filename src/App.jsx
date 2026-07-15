@@ -348,7 +348,7 @@ function App() {
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
-                  <img src={item023} alt="" className="statistic-icon" />
+                  <Icon src={item023} size={28} className="statistic-icon" bounce />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value">
                       ¥{fmt(totals.amountIncludingTax)}
@@ -365,7 +365,7 @@ function App() {
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
-                  <img src={item023} alt="" className="statistic-icon" />
+                  <Icon src={item023} size={28} className="statistic-icon" bounce />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value">
                       ¥{fmt(totals.taxAmount)}
@@ -382,7 +382,7 @@ function App() {
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
-                  <img src={item023} alt="" className="statistic-icon" />
+                  <Icon src={item023} size={28} className="statistic-icon" bounce />
                   <Typewriter trigger={dataKey} speed={40}>
                     <span className="statistic-value">
                       ¥{fmt(totals.amountExcludingTax)}
