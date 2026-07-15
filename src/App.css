@@ -141,7 +141,7 @@
 
 .ratio-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -149,8 +149,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex: 1 1 calc(33.333% - 7px);
-  min-width: 200px;
   animation: fadeInUp 0.3s ease both;
 }
 
@@ -311,7 +309,7 @@
 /* Table summary row */
 .table-summary {
   display: grid;
-  grid-template-columns: 140px 250px 250px;
+  grid-template-columns: 140px 250px 1fr;
   padding: 30px 30px 10px;
   margin-top: -1px;
   border-top: 2px dashed var(--animal-border-color-light);
@@ -380,6 +378,6 @@
   .app-container  { padding: 12px; }
   .summary-grid   { grid-template-columns: 1fr; gap: 12px; }
   .input-row      { flex-direction: column; gap: 12px; }
-  .table-summary  { grid-template-columns: 100px 1fr 1fr; }
+  .table-summary  { grid-template-columns: 100px 1fr 2fr; }
   .hero-subtitle  { font-size: 14px; }
 }
