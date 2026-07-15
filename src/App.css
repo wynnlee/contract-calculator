@@ -159,8 +159,14 @@
   margin-top: 14px;
 }
 
-.preset-btn {
-  font-size: 13px !important;
+.preset-tag {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.preset-tag:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 .remove-btn {

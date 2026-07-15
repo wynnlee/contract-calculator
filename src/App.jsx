@@ -65,7 +65,7 @@ function ChineseBadge({ text }) {
   if (!text) return null;
   return (
     <span className="chinese-badge">
-      {text}
+      <Tag color="brown" size="small">{text}</Tag>
       <CopyBtn text={text} />
     </span>
   );
@@ -337,9 +337,9 @@ function App() {
             <div className="ratio-actions">
               <Button type="dashed" size="small" onClick={addRatio}>+ 添加付款期</Button>
               {PRESET_RATIOS.map((preset, idx) => (
-                <Button key={idx} type="text" size="small" onClick={() => applyPreset(preset)} className="preset-btn">
+                <Tag key={idx} color="app-green" size="medium" onClick={() => applyPreset(preset)} className="preset-tag">
                   {preset.join(' + ')}
-                </Button>
+                </Tag>
               ))}
             </div>
           </div>
