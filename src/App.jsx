@@ -7,7 +7,6 @@ import {
   Table,
   Title,
   Tag,
-  Tooltip,
   Radio,
   Icon,
   Typewriter,
@@ -52,11 +51,9 @@ function CopyBtn({ text }) {
   if (text === undefined || text === null || text === '') return null;
 
   return (
-    <Tooltip title="复制" variant="island">
-      <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label="复制">
-        <Icon name="icon-camera" size={14} />
-      </Button>
-    </Tooltip>
+    <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label="复制">
+      <Icon name="icon-camera" size={14} />
+    </Button>
   );
 }
 
@@ -234,8 +231,8 @@ function App() {
         {/* Input Card */}
         <Card className="input-card">
           {/* Contract params */}
-          <div className="input-section-label">
-            合同参数
+          <div className="input-section-label unit-label">
+            金额单位：
             <Radio
               value={unit}
               onChange={setUnit}
@@ -245,7 +242,6 @@ function App() {
               ]}
               size="small"
               direction="horizontal"
-              style={{ marginLeft: 12, display: 'inline-flex' }}
             />
           </div>
           <div className="input-row">

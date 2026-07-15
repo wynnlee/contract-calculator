@@ -66,6 +66,10 @@
   margin-bottom: 30px;
 }
 
+.input-section-label.unit-label {
+  justify-content: flex-end;
+}
+
 .input-row {
   display: flex;
   gap: 30px;
@@ -295,11 +299,11 @@
 
 .amount-num {
   font-family: 'Nunito', monospace;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .amount-cn {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--animal-text-color);
 }
 
@@ -325,7 +329,7 @@
 .table-summary {
   display: grid;
   grid-template-columns: 140px 1fr 1fr;
-  padding: 30px 30px 10px;
+  padding: 10px 30px 10px;
   margin-top: -1px;
   border-top: 2px dashed var(--animal-border-color-light);
   align-items: start;
@@ -336,7 +340,7 @@
 
 .summary-label {
   font-weight: 800;
-  font-size: 15px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
