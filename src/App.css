@@ -28,7 +28,7 @@
 .app-container {
   min-height: 100vh;
   background: var(--animal-bg-color);
-  padding: 15px;
+  padding: 30px;
 }
 
 .app-wrapper {
@@ -39,7 +39,7 @@
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: 15px 0;
+  padding: 30px 0;
 }
 
 .hero-subtitle {
@@ -50,7 +50,7 @@
 
 /* ---------- Input Card ---------- */
 .input-card {
-  padding: 15px;
+  padding: 30px;
 }
 
 .input-section-label {
@@ -59,12 +59,12 @@
   font-size: 16px;
   font-weight: 700;
   color: var(--animal-text-color);
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .input-row {
   display: flex;
-  gap: 15px;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
@@ -98,7 +98,7 @@
 
 /* ---------- Ratio Section ---------- */
 .ratio-section {
-  padding: 15px;
+  padding: 30px;
   border-radius: var(--animal-border-radius-lg);
   background: var(--animal-bg-color-secondary);
   transition: background 0.35s ease, box-shadow 0.3s ease;
@@ -165,14 +165,14 @@
 
 /* ---------- Summary Cards ---------- */
 .results-section {
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin: 15px 0;
+  gap: 30px;
+  margin: 30px 0;
 }
 
 .summary-grid > * {
@@ -180,7 +180,7 @@
 }
 
 .summary-card {
-  padding: 15px;
+  padding: 30px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -278,7 +278,7 @@
 
 /* ---------- Installment Table ---------- */
 .installment-card {
-  padding: 15px;
+  padding: 30px;
 }
 
 .ratio-cell {
@@ -298,7 +298,7 @@
 .table-summary {
   display: grid;
   grid-template-columns: 140px 250px 250px;
-  padding: 15px 15px 5px;
+  padding: 30px 30px 10px;
   margin-top: 12px;
   border-top: 2px dashed var(--animal-border-color-light);
   align-items: start;
@@ -334,7 +334,7 @@
 /* ---------- Footer ---------- */
 .app-footer {
   text-align: center;
-  padding: 15px;
+  padding: 30px;
 }
 
 .footer-text {
