@@ -15,6 +15,7 @@ import {
 } from 'animal-island-ui';
 import 'animal-island-ui/dist/index.css';
 import { numberToChinese, formatNumber } from './utils/numberToChinese';
+import bgImg from '/bg.jpg';
 import './App.css';
 
 /* ── Helpers ── */
@@ -222,7 +223,7 @@ function App() {
   ];
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ backgroundImage: `url(${bgImg})` }}>
       <div className="app-wrapper">
         {/* Header */}
         <header className="hero">
@@ -322,6 +323,7 @@ function App() {
                     style={{ flex: 1 }}
                   />
                   <Button
+                    type="primary"
                     danger
                     size="small"
                     onClick={() => removeRatio(idx)}
@@ -398,7 +400,6 @@ function App() {
                 columns={installmentColumns}
                 dataSource={totals.installments}
                 rowKey="key"
-                striped
                 loading={tableLoading}
                 scroll={{ x: 640 }}
               />

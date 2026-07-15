@@ -27,7 +27,11 @@
 /* ---------- Layout ---------- */
 .app-container {
   min-height: 100vh;
-  background: var(--animal-bg-color);
+  background-color: var(--animal-bg-color);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   padding: 30px;
 }
 
