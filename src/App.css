@@ -141,7 +141,7 @@
 
 .ratio-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -149,6 +149,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1 1 calc(33.333% - 7px);
+  min-width: 200px;
   animation: fadeInUp 0.3s ease both;
 }
 
@@ -346,10 +348,6 @@
 }
 
 /* ---------- Footer ---------- */
-.animal-wrapper-IRrhj {
-  margin-top: 50px;
-}
-
 .app-footer {
   text-align: center;
   padding: 30px;

@@ -9,7 +9,6 @@ import {
   Tag,
   Tooltip,
   Radio,
-  Notification,
   Icon,
   Typewriter,
   Footer,
@@ -44,9 +43,9 @@ function CopyBtn({ text }) {
   const copy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(String(text));
-      Notification.success({ message: '复制成功', duration: 1.5 });
+      /* silently copied */
     } catch {
-      Notification.error({ message: '复制失败，请手动复制', duration: 1.5 });
+      /* silent fail */
     }
   }, [text]);
 
@@ -361,7 +360,7 @@ function App() {
                 <div className="statistic-row">
                   <img src={item023} alt="" className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
-                    <span className="statistic-value" style={{ color: 'var(--animal-primary-color)' }}>
+                    <span className="statistic-value">
                       ¥{fmt(totals.amountIncludingTax)}
                     </span>
                   </Typewriter>
@@ -377,7 +376,7 @@ function App() {
                 <div className="statistic-row">
                   <img src={item023} alt="" className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
-                    <span className="statistic-value" style={{ color: 'var(--animal-warning-color)' }}>
+                    <span className="statistic-value">
                       ¥{fmt(totals.taxAmount)}
                     </span>
                   </Typewriter>
@@ -405,7 +404,6 @@ function App() {
 
             {/* Installment Table */}
             <Card className="installment-card">
-              <Title size="small" color="app-blue">分期明细</Title>
               <Table
                 columns={installmentColumns}
                 dataSource={totals.installments}
