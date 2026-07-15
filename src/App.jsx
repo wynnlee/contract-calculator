@@ -209,7 +209,6 @@ function App() {
     {
       title: unit === 'wan' ? '含税金额 (万元)' : '含税金额 (元)',
       dataIndex: 'includingTaxAmount',
-      width: 250,
       render: (val, record) => (
         <AmountWithCopy value={val} formatted={`¥${fmt(val)}`} chinese={record.chineseIncludingTax} bold color="var(--animal-primary-color)" />
       ),
