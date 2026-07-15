@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import {
   Button,
   Input,
@@ -8,7 +8,6 @@ import {
   Title,
   Divider,
   Tag,
-  Switch,
   Tooltip,
   Radio,
   Notification,
@@ -52,7 +51,7 @@ function CopyBtn({ text, label }) {
   return (
     <Tooltip title={`复制${label || ''}`} variant="island">
       <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label={`复制${label || ''}`}>
-        <Icon name="icon-shopping" size={14} />
+        <Icon name="icon-camera" size={14} />
       </Button>
     </Tooltip>
   );
@@ -90,18 +89,11 @@ function AmountWithCopy({ value, formatted, chinese, bold, color }) {
 /* ── Main App ── */
 
 function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('app-theme') || 'light');
   const [unitPrice, setUnitPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
   const [taxRate, setTaxRate] = useState('0.13');
   const [ratioInputs, setRatioInputs] = useState(['30', '70']);
   const [unit, setUnit] = useState('yuan');
-
-  // Theme
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('app-theme', theme);
-  }, [theme]);
 
   // Display helpers
   const disp = useCallback((amount) => unit === 'wan' ? amount / 10000 : amount, [unit]);
@@ -217,13 +209,6 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Theme toggle */}
-      <div className="theme-toggle">
-        <span className="theme-icon">☀️</span>
-        <Switch checked={theme === 'dark'} onChange={(v) => setTheme(v ? 'dark' : 'light')} size="small" />
-        <span className="theme-icon">🌙</span>
-      </div>
-
       <div className="app-wrapper">
         {/* Header */}
         <header className="hero">
@@ -357,7 +342,6 @@ function App() {
             <div className="summary-grid">
               <Card className="summary-card highlight-card" color="app-blue">
                 <div className="card-header">
-                  <Icon name="icon-miles" size={22} className="card-icon" />
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
@@ -371,7 +355,6 @@ function App() {
 
               <Card className="summary-card tax-card" color="app-orange">
                 <div className="card-header">
-                  <Icon name="icon-diy" size={22} className="card-icon" />
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
@@ -385,7 +368,6 @@ function App() {
 
               <Card className="summary-card exclude-card" color="app-green">
                 <div className="card-header">
-                  <Icon name="icon-critterpedia" size={22} className="card-icon" />
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
@@ -427,7 +409,7 @@ function App() {
           </div>
         ) : (
           <div className="empty-state">
-            <Icon name="icon-map" size={56} className="empty-icon" />
+            <Icon name="icon-miles" size={56} className="empty-icon" />
             <p className="empty-text">请在上方输入合同参数，计算结果将在此显示</p>
           </div>
         )}
