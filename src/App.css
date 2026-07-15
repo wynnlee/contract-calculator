@@ -216,9 +216,18 @@
   margin-bottom: 4px;
 }
 
-.statistic-row .animal-wrapper-pbOTq {
-  display: inline-flex;
-  align-items: center;
+.statistic-icon {
+  flex-shrink: 0;
+  margin-right: 2px;
+  color: var(--animal-text-color);
+}
+
+.statistic-value {
+  font-family: 'Nunito', monospace;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--animal-text-color);
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Chinese Badge ---------- */

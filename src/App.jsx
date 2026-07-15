@@ -12,11 +12,11 @@ import {
   Notification,
   Icon,
   Typewriter,
-  Wallet,
+  Footer,
 } from 'animal-island-ui';
 import 'animal-island-ui/dist/index.css';
 import { numberToChinese, formatNumber } from './utils/numberToChinese';
-import bgImg from '/bg.jpg';
+import bgImg from '/bg2.jpg';
 import './App.css';
 
 /* ── Helpers ── */
@@ -357,8 +357,11 @@ function App() {
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
+                  <Icon name="icon-miles" size={22} className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
-                    <Wallet value={`¥${fmt(totals.amountIncludingTax)}`} size="medium" />
+                    <span className="statistic-value" style={{ color: 'var(--animal-primary-color)' }}>
+                      ¥{fmt(totals.amountIncludingTax)}
+                    </span>
                   </Typewriter>
                   <CopyBtn text={fmt(totals.amountIncludingTax)} />
                 </div>
@@ -370,8 +373,11 @@ function App() {
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
+                  <Icon name="icon-miles" size={22} className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
-                    <Wallet value={`¥${fmt(totals.taxAmount)}`} size="medium" />
+                    <span className="statistic-value" style={{ color: 'var(--animal-warning-color)' }}>
+                      ¥{fmt(totals.taxAmount)}
+                    </span>
                   </Typewriter>
                   <CopyBtn text={fmt(totals.taxAmount)} />
                 </div>
@@ -383,8 +389,11 @@ function App() {
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
+                  <Icon name="icon-miles" size={22} className="statistic-icon" />
                   <Typewriter trigger={dataKey} speed={40}>
-                    <Wallet value={`¥${fmt(totals.amountExcludingTax)}`} size="medium" />
+                    <span className="statistic-value">
+                      ¥{fmt(totals.amountExcludingTax)}
+                    </span>
                   </Typewriter>
                   <CopyBtn text={fmt(totals.amountExcludingTax)} />
                 </div>
@@ -429,6 +438,8 @@ function App() {
         )}
 
         {/* Footer */}
+        <Footer type="tree" />
+
         <div className="app-footer">
           <span className="footer-text">计算结果仅供参考，实际金额以合同约定为准</span>
         </div>
