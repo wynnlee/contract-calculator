@@ -238,6 +238,15 @@
   letter-spacing: 0.02em;
 }
 
+.statistic-unit {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--animal-text-color);
+  opacity: 0.6;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
 /* ---------- Chinese Badge ---------- */
 .chinese-badge {
   display: flex;

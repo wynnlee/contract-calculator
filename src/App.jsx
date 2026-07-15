@@ -65,7 +65,7 @@ function ChineseBadge({ text }) {
   if (!text) return null;
   return (
     <span className="chinese-badge">
-      <Tag color="brown" size="small">{text}</Tag>
+      {text}
       <CopyBtn text={text} />
     </span>
   );
@@ -363,6 +363,7 @@ function App() {
                       ¥{fmt(totals.amountIncludingTax)}
                     </span>
                   </Typewriter>
+                  <span className="statistic-unit">{unit === 'wan' ? '万元' : '元'}</span>
                   <CopyBtn text={fmt(totals.amountIncludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseIncludingTax} />
@@ -379,6 +380,7 @@ function App() {
                       ¥{fmt(totals.taxAmount)}
                     </span>
                   </Typewriter>
+                  <span className="statistic-unit">{unit === 'wan' ? '万元' : '元'}</span>
                   <CopyBtn text={fmt(totals.taxAmount)} />
                 </div>
                 <ChineseBadge text={numberToChinese(totals.taxAmount)} />
@@ -395,6 +397,7 @@ function App() {
                       ¥{fmt(totals.amountExcludingTax)}
                     </span>
                   </Typewriter>
+                  <span className="statistic-unit">{unit === 'wan' ? '万元' : '元'}</span>
                   <CopyBtn text={fmt(totals.amountExcludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseExcludingTax} />
