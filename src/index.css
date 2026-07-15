@@ -13,7 +13,7 @@
 body {
   margin: 0;
   background: var(--animal-bg-color);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 #root {
@@ -21,19 +21,19 @@ body {
   max-width: 100%;
 }
 
-/* Dark theme overrides */
+/* ===== Dark Theme ===== */
 body[data-theme='dark'] {
   --animal-bg-color: #2a2520;
-  --animal-bg-color-secondary: #3a3530;
-  --animal-text-color: #e8e0d0;
-  --animal-text-color-secondary: #b0a590;
-  --animal-text-color-muted: #c0b8a0;
-  --animal-border-color: #5a5550;
-  --animal-border-color-hover: #8a8070;
-  --animal-border-color-light: #4a4540;
-  --animal-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --animal-shadow-base: 0 3px 10px rgba(0, 0, 0, 0.3);
-  --animal-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --animal-bg-color-secondary: #38322c;
+  --animal-text-color: #e6dcc8;
+  --animal-text-color-secondary: #c4b898;
+  --animal-text-color-muted: #d4c8a8;
+  --animal-border-color: #5a5450;
+  --animal-border-color-hover: #9a9080;
+  --animal-border-color-light: #484440;
+  --animal-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25);
+  --animal-shadow-base: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --animal-shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.45);
 }
 
 body[data-theme='dark'] .app-container {

@@ -12,6 +12,7 @@ import {
   Tooltip,
   Radio,
   Notification,
+  Icon,
 } from 'animal-island-ui';
 import 'animal-island-ui/dist/index.css';
 import { numberToChinese, formatNumber } from './utils/numberToChinese';
@@ -51,7 +52,7 @@ function CopyBtn({ text, label }) {
   return (
     <Tooltip title={`复制${label || ''}`} variant="island">
       <Button type="text" size="small" onClick={copy} className="copy-btn" aria-label={`复制${label || ''}`}>
-        📋
+        <Icon name="icon-shopping" size={14} />
       </Button>
     </Tooltip>
   );
@@ -349,14 +350,14 @@ function App() {
 
         {/* Results */}
         {hasData ? (
-          <div className="results-section">
+          <div className="results-section fade-in">
             <Title size="middle" color="app-blue">计算结果</Title>
 
             {/* Summary Cards */}
             <div className="summary-grid">
               <Card className="summary-card highlight-card" color="app-blue">
                 <div className="card-header">
-                  <span className="card-icon">💰</span>
+                  <Icon name="icon-miles" size={22} className="card-icon" />
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
@@ -370,7 +371,7 @@ function App() {
 
               <Card className="summary-card tax-card" color="app-orange">
                 <div className="card-header">
-                  <span className="card-icon">🧾</span>
+                  <Icon name="icon-diy" size={22} className="card-icon" />
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
@@ -384,7 +385,7 @@ function App() {
 
               <Card className="summary-card exclude-card" color="app-green">
                 <div className="card-header">
-                  <span className="card-icon">✅</span>
+                  <Icon name="icon-critterpedia" size={22} className="card-icon" />
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
@@ -426,7 +427,7 @@ function App() {
           </div>
         ) : (
           <div className="empty-state">
-            <span className="empty-icon">📄</span>
+            <Icon name="icon-map" size={56} className="empty-icon" />
             <p className="empty-text">请在上方输入合同参数，计算结果将在此显示</p>
           </div>
         )}
