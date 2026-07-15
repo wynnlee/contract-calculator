@@ -47,7 +47,7 @@
 }
 
 .hero-subtitle {
-  margin-top: 12px;
+  margin-top: 30px;
   font-size: 15px;
   color: var(--animal-text-color);
 }
@@ -216,12 +216,9 @@
   margin-bottom: 4px;
 }
 
-.statistic-value {
-  font-family: 'Nunito', monospace;
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--animal-text-color);
-  letter-spacing: 0.02em;
+.statistic-row .animal-wrapper-pbOTq {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* ---------- Chinese Badge ---------- */
@@ -370,7 +367,6 @@
 @media (max-width: 768px) {
   .app-container  { padding: 12px; }
   .summary-grid   { grid-template-columns: 1fr; gap: 12px; }
-  .statistic-value { font-size: 22px; }
   .input-row      { flex-direction: column; gap: 12px; }
   .table-summary  { grid-template-columns: 100px 1fr 1fr; }
   .hero-subtitle  { font-size: 14px; }

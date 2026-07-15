@@ -6,12 +6,13 @@ import {
   Card,
   Table,
   Title,
-  Divider,
   Tag,
   Tooltip,
   Radio,
   Notification,
   Icon,
+  Typewriter,
+  Wallet,
 } from 'animal-island-ui';
 import 'animal-island-ui/dist/index.css';
 import { numberToChinese, formatNumber } from './utils/numberToChinese';
@@ -231,8 +232,6 @@ function App() {
           <p className="hero-subtitle">输入合同参数，自动计算含税/不含税金额及各期款项</p>
         </header>
 
-        <Divider type="wave-yellow" />
-
         {/* Input Card */}
         <Card className="input-card">
           {/* Contract params */}
@@ -346,8 +345,6 @@ function App() {
           </div>
         </Card>
 
-        <Divider type="wave-yellow" />
-
         {/* Results */}
         {hasData ? (
           <div className="results-section fade-in">
@@ -360,9 +357,9 @@ function App() {
                   <span className="card-title">含税总金额</span>
                 </div>
                 <div className="statistic-row">
-                  <span className="statistic-value" style={{ color: 'var(--animal-primary-color)' }}>
-                    ¥{fmt(totals.amountIncludingTax)}
-                  </span>
+                  <Typewriter trigger={dataKey} speed={40}>
+                    <Wallet value={`¥${fmt(totals.amountIncludingTax)}`} size="medium" />
+                  </Typewriter>
                   <CopyBtn text={fmt(totals.amountIncludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseIncludingTax} />
@@ -373,9 +370,9 @@ function App() {
                   <span className="card-title">税额</span>
                 </div>
                 <div className="statistic-row">
-                  <span className="statistic-value" style={{ color: 'var(--animal-warning-color)' }}>
-                    ¥{fmt(totals.taxAmount)}
-                  </span>
+                  <Typewriter trigger={dataKey} speed={40}>
+                    <Wallet value={`¥${fmt(totals.taxAmount)}`} size="medium" />
+                  </Typewriter>
                   <CopyBtn text={fmt(totals.taxAmount)} />
                 </div>
                 <ChineseBadge text={numberToChinese(totals.taxAmount)} />
@@ -386,7 +383,9 @@ function App() {
                   <span className="card-title">不含税金额</span>
                 </div>
                 <div className="statistic-row">
-                  <span className="statistic-value">¥{fmt(totals.amountExcludingTax)}</span>
+                  <Typewriter trigger={dataKey} speed={40}>
+                    <Wallet value={`¥${fmt(totals.amountExcludingTax)}`} size="medium" />
+                  </Typewriter>
                   <CopyBtn text={fmt(totals.amountExcludingTax)} />
                 </div>
                 <ChineseBadge text={totals.chineseExcludingTax} />
