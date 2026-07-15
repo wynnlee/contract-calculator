@@ -343,7 +343,7 @@ function App() {
 
             {/* Summary Cards */}
             <div className="summary-grid">
-              <Card className="summary-card highlight-card" color="app-blue">
+              <Card className="summary-card highlight-card" color="app-blue" pattern="default">
                 <div className="card-header">
                   <span className="card-title">含税总金额</span>
                 </div>
@@ -360,7 +360,7 @@ function App() {
                 <ChineseBadge text={totals.chineseIncludingTax} />
               </Card>
 
-              <Card className="summary-card tax-card" color="app-orange">
+              <Card className="summary-card tax-card" color="app-orange" pattern="default">
                 <div className="card-header">
                   <span className="card-title">税额</span>
                 </div>
@@ -377,7 +377,7 @@ function App() {
                 <ChineseBadge text={numberToChinese(totals.taxAmount)} />
               </Card>
 
-              <Card className="summary-card exclude-card" color="app-green">
+              <Card className="summary-card exclude-card" color="app-green" pattern="default">
                 <div className="card-header">
                   <span className="card-title">不含税金额</span>
                 </div>
