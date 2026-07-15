@@ -101,18 +101,14 @@ function App() {
   const fmt = useCallback((amount) => {
     const val = disp(amount);
     if (unit === 'wan') {
-      const parts = val.toFixed(4).split('.');
-      const intStr = Number(parts[0]).toLocaleString('zh-CN');
-      const decStr = parts[1].replace(/0+$/, '');
-      return decStr ? `${intStr}.${decStr}` : intStr;
+      const fixed = val.toFixed(2);
+      const [intPart, decPart] = fixed.split('.');
+      return `${Number(intPart).toLocaleString('zh-CN')}.${decPart}`;
     }
     return formatNumber(val);
   }, [unit, disp]);
   const getPrecision = useCallback((amount) => {
-    if (unit === 'yuan') return 2;
-    const val = amount / 10000;
-    const dec = val.toFixed(4).split('.')[1].replace(/0+$/, '');
-    return dec.length;
+    return 2;
   }, [unit]);
 
   // Unit price conversion
@@ -343,7 +339,7 @@ function App() {
         {/* Results */}
         {hasData ? (
           <div className="results-section fade-in">
-            <Title size="middle" color="app-blue">计算结果</Title>
+            <Title size="middle" color="purple">计算结果</Title>
 
             {/* Summary Cards */}
             <div className="summary-grid">
